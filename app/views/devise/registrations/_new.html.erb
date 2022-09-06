@@ -1,34 +1,37 @@
-<h2>Sign up</h2>
+<div class="container-fluid w-25 border rounded shadow mt-5 p-4 text-center" >
+  <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
+  <div class="field mb-3 text-start">
     <%= f.label :user_name, 'User Name / Full Name' %><br />
     <%= f.text_field :user_name %>
   </div>
 
-  <div class="field">
+  <div class="field mb-3 text-start">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" , required: true %>
   </div>
 
-  <div class="field">
+  <div class="field mb-3 text-start">
     <%= f.label :password %>
-    <p>(only 8 Characters,1 uppercase,1 lowercase,1 special Character)</p>
+    <!-- <p>(only 8 Characters,1 uppercase,1 lowercase,1 special Character)</p> -->
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
+  <div class="field mb-3 text-start">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions mb-2">
+    <%= f.submit "Sign up", class: 'btn btn-primary btn-lg'%>
   </div>
 <% end %>
 
 <p>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described</p>
 
 <%= render "devise/shared/links" %>
+
+</div>
