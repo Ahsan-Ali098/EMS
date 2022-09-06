@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  validates :first_name, :last_name, presence: true
+  validates :user_name, presence: true
   PASSWORD_FORMAT = /\A
   (?=.{8,})          # Must contain 8 or more characters
   (?=.*\d)           # Must contain a digit
