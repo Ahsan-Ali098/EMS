@@ -9,6 +9,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, authentication_keys: [:login]
 
+  PASSWORD_FORMAT = /\A
+  (?=.*[a-z])        # Must contain a lower case character
+  (?=.*[A-Z])        # Must contain an upper case character
+  (?=.*[[:^alnum:]]) # Must contain a symbol
+/x.freeze
+
+  validates :password,
+            presence: true,
+            format: { with: PASSWORD_FORMAT }
+
   validates :user_name, presence: true
 
   def login
@@ -24,26 +34,4 @@ class User < ApplicationRecord
       where(conditions.to_h).first
     end
   end
-
-  PASSWORD_FORMAT = /\A
-  (?=.{8,})          # Must contain 8 or more characters
-  (?=.*\d)           # Must contain a digit
-  (?=.*[a-z])        # Must contain a lower case character
-  (?=.*[A-Z])        # Must contain an upper case character
-  (?=.*[[:^alnum:]]) # Must contain a symbol
-/x.freeze
-
-  validates :password,
-            presence: true,
-            length: { in: Devise.password_length },
-            format: { with: PASSWORD_FORMAT },
-            confirmation: true,
-            on: :create
-
-  validates :password,
-            allow_nil: true,
-            length: { in: Devise.password_length },
-            format: { with: PASSWORD_FORMAT },
-            confirmation: true,
-            on: :update
 end
