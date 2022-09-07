@@ -7,7 +7,7 @@ module Admin
     before_action :find_user, only: %i[show update edit destroy]
 
     def index
-      @users = User.all
+      @users = User.all.page(params[:page])
     end
 
     def new
