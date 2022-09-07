@@ -32,12 +32,6 @@
 </div>
 
 <div class="d-none sign-up-form">
-  <%= render partial: "devise/registrations/new" %>
+  <%= render file: "devise/registrations/new" %>
 </div>
 
-<script>
-  function addSignUp(){
-    document.getElementsByClassName('sign-up-form')[0].classList.remove('d-none')
-  }
-  document.getElementsByClassName('sign-up-button')[0].addEventListener('click', addSignUp)
-</script>
