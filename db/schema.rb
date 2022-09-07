@@ -12,14 +12,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_905_124_626) do
+ActiveRecord::Schema.define(version: 20_220_906_093_020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'users', force: :cascade do |t|
-    t.string 'full_name'
-    t.string 'first_name'
-    t.string 'last_name'
+    t.string 'user_name'
     t.string 'email', default: '', null: false
     t.string 'encrypted_password', default: '', null: false
     t.string 'reset_password_token'
