@@ -20,6 +20,8 @@ class User < ApplicationRecord
             format: { with: PASSWORD_FORMAT }
 
   validates :user_name, presence: true
+  validates :email, presence: true
+  validates :password, confirmation: { case_sensitive: true }
 
   def login
     @login || user_name || email
