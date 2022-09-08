@@ -23,9 +23,7 @@ module Admin
       end
     end
 
-    def show
-      @user = User.find(params[:id])
-    end
+    def show; end
 
     def update
       if @user.update(user_params)
