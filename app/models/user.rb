@@ -2,6 +2,7 @@
 
 # Users Model
 class User < ApplicationRecord
+  paginates_per 5
   attr_writer :login
 
   # Include default devise modules. Others available are:
@@ -35,5 +36,10 @@ class User < ApplicationRecord
     elsif conditions.key?(:user_name) || conditions.key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def self.search_user(search)
+    User.where('cast(id as text) LIKE :value or lower(users.user_name) LIKE :value or lower(users.email) LIKE :value ',
+               value: "%#{search.downcase}%")
   end
 end

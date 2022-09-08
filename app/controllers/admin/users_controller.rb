@@ -7,7 +7,11 @@ module Admin
     before_action :find_user, only: %i[show update edit destroy]
 
     def index
-      @users = User.all
+      @users = if params[:search].present?
+                 User.search_user(params[:search]).page(params[:page])
+               else
+                 User.all.page(params[:page])
+               end
     end
 
     def new
@@ -23,9 +27,7 @@ module Admin
       end
     end
 
-    def show
-      @user = User.find(params[:id])
-    end
+    def show; end
 
     def update
       if @user.update(user_params)

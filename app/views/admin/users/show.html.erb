@@ -1,5 +1,11 @@
-<h1>User:<%= @user.id %></h1>
-<p> User Name: <%= @user.user_name %></p>
-<p> Email: <%= @user.email %></p>
-<p> Created at: <%= @user.created_at %></p>
-<br>
+<div class="container-fluid w-50 border rounded shadow mt-5 p-4">
+  <%= link_to "Back", admin_users_path  %>
+  <br>
+  <div class="text-center">
+    <h1>User:<%= @user.id %></h1>
+    <p> User Name: <%= @user.user_name %></p>
+    <p> Email: <%= @user.email %></p>
+    <p> Created at: <%= @user.created_at %></p>
+    <br>
+  </div>
+</div>
