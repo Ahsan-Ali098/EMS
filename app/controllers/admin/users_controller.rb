@@ -11,7 +11,12 @@ module Admin
       per_page = params[:page]
       search_param = params[:search]
 
-      @users = search_param.present? ? User.search_user(search_param).page(per_page) : User.all.page(per_page).order(sort_param)
+      @users = if search_param.present?
+                 User.search_user(search_param)
+                     .page(per_page)
+               else
+                 User.all.page(per_page).order(sort_param)
+               end
       @users.page(per_page)
     end
 
@@ -46,7 +51,7 @@ module Admin
 
     def destroy
       @user.destroy
-      redirect_to admin_user_path
+      redirect_to admin_users_path
     end
 
     private
