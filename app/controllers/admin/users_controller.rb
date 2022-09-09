@@ -4,15 +4,19 @@
 module Admin
   # Class User Controller
   class UsersController < ApplicationController
-    helper_method :sort_column, :sort_direction
     before_action :find_user, only: %i[show update edit destroy]
+    helper_method :sort_column, :sort_direction
 
     def index
-      @users = if params[:search].present?
-                 User.search_user(params[:search]).page(params[:page])
-               else
-                 User.all.page(params[:page]).order(sort_column + ' ' + sort_direction).page(params[:page])
-               end
+      per_page = params[:page]
+      search_param = params[:search]
+
+      @users = search_param.present? ? User.search_user(search_param).page(per_page) : User.all.page(per_page).order(sort_param)
+      @users.page(per_page)
+    end
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
     end
 
     def new
