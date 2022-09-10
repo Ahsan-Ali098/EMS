@@ -22,6 +22,10 @@ module Admin
 
     def sort_param
       "#{sort_column} #{sort_direction}"
+      respond_to do |format|
+        format.html
+        format.csv { send_data ExportService::UserExport.new(User.all).to_csv, filename: "userinfo-#{Date.today}.csv" }
+      end
     end
 
     def new

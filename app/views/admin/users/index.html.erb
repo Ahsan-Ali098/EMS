@@ -5,6 +5,7 @@
       <%= submit_tag "search", class: "btn btn-primary"%>
     </div>
   <% end %>
+  <p><%= link_to("Generate Report", admin_users_path(format: :csv), class: "btn btn-success mt-3 mb-3",) %></p>
   <table class="table table-sm">
     <thead>
       <th scope="col">''</th>
