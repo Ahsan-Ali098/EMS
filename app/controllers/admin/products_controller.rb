@@ -8,7 +8,7 @@ module Admin
     def index
       @products = Product.all.page(params[:page])
     end
-    
+
     def new
       @product = Product.new
     end
@@ -40,6 +40,7 @@ module Admin
     end
 
     private
+
     def find_product
       @product = Product.find(params[:id])
     end
