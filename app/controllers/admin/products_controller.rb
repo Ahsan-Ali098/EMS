@@ -5,6 +5,7 @@ module Admin
   # Class for ProductsController
   class ProductsController < ApplicationController
     before_action :find_product, only: %i[show update edit destroy]
+
     def index
       @products = Product.all.page(params[:page])
     end
@@ -16,7 +17,7 @@ module Admin
     def create
       @product = Product.new(product_params)
       if @product.save
-        redirect_to @product
+        redirect_to admin_products_path
       else
         render 'new'
       end
@@ -26,7 +27,7 @@ module Admin
 
     def update
       if @product.update(product_params)
-        redirect_to([:admin, @product])
+        redirect_to admin_products_path
       else
         render 'edit'
       end
@@ -46,7 +47,13 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:title, :price, :description, :status)
+      params.require(:product).permit(
+        :title,
+        :price,
+        :description,
+        :status,
+        :category_id
+      )
     end
   end
 end

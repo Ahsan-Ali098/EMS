@@ -10,22 +10,15 @@ module Admin
     def index
       per_page = params[:page]
       search_param = params[:search]
-
-      @users = if search_param.present?
-                 User.search_user(search_param)
-                     .page(per_page)
-               else
-                 User.all.page(per_page).order(sort_param)
-               end
-      @users.page(per_page)
-    end
-
-    def sort_param
-      "#{sort_column} #{sort_direction}"
+      search(search_param, per_page)
       respond_to do |format|
         format.html
         format.csv { send_data ExportService::UserExport.new(User.all).to_csv, filename: "userinfo-#{Date.today}.csv" }
       end
+    end
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
     end
 
     def new
@@ -59,6 +52,16 @@ module Admin
     end
 
     private
+
+    def search(search_param, per_page)
+      @users = if search_param.present?
+                 User.search_user(search_param)
+                     .page(per_page)
+               else
+                 User.all.page(per_page).order(sort_param)
+               end
+      @users.page(per_page)
+    end
 
     def find_user
       @user = User.find(params[:id])
