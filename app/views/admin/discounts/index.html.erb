@@ -1,0 +1,28 @@
+<div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center sign-up-form mb-5" >
+  <h2>Discounts</h2>
+  <p><%= link_to '+ Create', new_admin_discount_path, class: "btn btn-primary" %></p>
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Discount Value</th>
+          <th scope="col">Action</th>
+      </thead>
+      <tbody>
+        <% @discounts.each do |discount| %>
+        <tr>
+          <td><%= discount.id %></td>
+          <td><%= discount.name %></td>
+          <td><%= discount.price %></td>
+          <td>
+              <%= link_to 'Click', admin_discount_path(discount) %>
+              <%= link_to 'Edit', edit_admin_discount_path(discount) %>
+              <%= link_to 'Delete', admin_discount_path(discount), method: :delete, data: {Confirm: "Are you sure?"} %>
+          </td>
+        </tr>
+        <% end %> 
+      </tbody>
+    </table>
+  </div>
+</div>
