@@ -11,6 +11,12 @@ module Admin
       per_page = params[:page]
       search_param = params[:search]
       search(search_param, per_page)
+      respond_to do |format|
+        format.html
+        format.csv do
+          send_data ExportService::ProductExport.new(Product.all).to_csv, filename: "productsinfo-#{Date.today}.csv"
+        end
+      end
     end
 
     def sort_param
