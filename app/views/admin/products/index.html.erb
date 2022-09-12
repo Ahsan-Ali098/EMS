@@ -1,36 +1,36 @@
 <div class="table-responsive">
   <%= form_tag admin_products_path, method: :get do %>
-  <p><%= link_to("Generate Report", admin_products_path(format: :csv), class: "btn btn-success mt-3 mb-3") %></p>
+  <p><%= link_to('Generate Report', admin_products_path(format: :csv), class: "btn btn-success mt-3 mb-3") %></p>
     <div class="input-group input-group-sm" style="width: 250px; margin-left:70%;">
-      <%= search_field_tag :search, params[:search], placeholder: 'Search by name', class: 'form-control' %>
-      <%= submit_tag "search", class: "btn btn-primary"%>
+      <%= search_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control' %>
+      <%= submit_tag "search", class: "btn btn-primary" %>
     </div>
   <% end %>
   
-  <p><%= link_to "+ Create", new_admin_product_path, class: "btn btn-primary" %></p>
+  <p><%= link_to '+ Create', new_admin_product_path, class: "btn btn-primary" %></p>
   <table class="table table-sm">
     <thead>
       <th scope="col">''</th>
-        <th scope="col">ID</th>
-        <th scope="col">Product Name</th>
-        <th scope="col">Compnay Name</th>
-        <th scope="col">Category</th>
-        <th scope="col">Status</th>
+        <th scope="col"><%= sortable "id","ID"%></th>
+        <th scope="col"><%= sortable "title","Title" %></th>
+        <th scope="col"><%= sortable "price","Price" %></th>
+        <th scope="col"><%= sortable "category","Category" %></th>
+        <th scope="col"><%= sortable "status","Status" %></th>
         <th scope="col">Action</th>
     </thead>
     <tbody>
       <% @products.each do |product| %>
       <tr>
-        <td><input type="checkbox" name="EMS"> </td>
-        <td><%= product.id %> </td>
+        <td><input type="checkbox" name="EMS"></td>
+        <td><%= product.id %></td>
         <td><%= product.title %></td>
-        <td>Infinikorn</td>
-        <td><%= product.category.name %> </td>
-        <td><%= product.status %> </td>
+        <td><%= product.price %></td>
+        <td><%= product.category.name %></td>
+        <td><%= product.status %></td>
         <td>
-            <%= link_to "Click", admin_product_path(product) %>
-            <%= link_to "Edit", edit_admin_product_path(product) %>
-            <%= link_to "Delete User", admin_product_path(product), method: :delete, data: {Confirm: "Are you sure?"}  %>
+            <%= link_to 'Click', admin_product_path(product) %>
+            <%= link_to 'Edit', edit_admin_product_path(product) %>
+            <%= link_to 'Delete User', admin_product_path(product), method: :delete, data: {Confirm: "Are you sure?"} %>
         </td>
       </tr>
       <% end %> 
