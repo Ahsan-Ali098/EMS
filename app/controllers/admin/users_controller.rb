@@ -5,13 +5,23 @@ module Admin
   # Class User Controller
   class UsersController < ApplicationController
     before_action :find_user, only: %i[show update edit destroy]
+    helper_method :sort_column, :sort_direction
 
     def index
-      @users = if params[:search].present?
-                 User.search_user(params[:search]).page(params[:page])
+      per_page = params[:page]
+      search_param = params[:search]
+
+      @users = if search_param.present?
+                 User.search_user(search_param)
+                     .page(per_page)
                else
-                 User.all.page(params[:page])
+                 User.all.page(per_page).order(sort_param)
                end
+      @users.page(per_page)
+    end
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
     end
 
     def new
@@ -41,7 +51,7 @@ module Admin
 
     def destroy
       @user.destroy
-      redirect_to admin_user_path
+      redirect_to admin_users_path
     end
 
     private
@@ -52,6 +62,14 @@ module Admin
 
     def user_params
       params.require(:user).permit(:user_name, :email, :password)
+    end
+
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
   end
 end

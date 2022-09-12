@@ -1,6 +1,6 @@
 <div class="table-responsive">
   <%= form_tag admin_users_path, method: :get do %>
-    <div class="input-group input-group-sm" style="width: 250px;">
+    <div class="input-group input-group-sm mb-5" style="width: 250px;">
       <%= search_field_tag :search, params[:search], placeholder: 'Search by name', class: 'form-control' %>
       <%= submit_tag "search", class: "btn btn-primary"%>
     </div>
@@ -8,10 +8,10 @@
   <table class="table table-sm">
     <thead>
       <th scope="col">''</th>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
+        <th scope="col"><%= sortable "id","ID" %></th>
+        <th scope="col"><%= sortable "user_name","User Name" %></th>
         <th scope="col">Compnay Name</th>
-        <th scope="col">Email</th>
+        <th scope="col"><%= sortable "email","Email" %></th>
         <th scope="col">Phone</th>
         <th scope="col">Role</th>
         <th scope="col">Action</th>
@@ -28,9 +28,28 @@
         <td>Client</td>
         <td><%= link_to "Click", admin_user_path(user) %>
             <%= link_to "Edit", edit_admin_user_path(user) %>
-            <%= link_to "Delete User", admin_user_path(user), method: :delete, data: {Confirm: "Are you sure?"}  %>
+            <a type="button" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal<%= user.id %>">
+              Delete
+            </a>
         </td>
       </tr>
+      <div class="modal fade" id="exampleModal<%= user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" data-id id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure to want delete "<%= user.user_name %>"
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <%= link_to "Yes", admin_user_path(user), method: :delete, data: {dismiss: "modal"}, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
       <% end %> 
     </tbody>
   </table>
