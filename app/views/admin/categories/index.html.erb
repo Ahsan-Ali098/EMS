@@ -1,0 +1,23 @@
+<h2>Categories</h2>
+<p><%= link_to '+ Create', new_admin_category_path, class: "btn btn-primary" %></p>
+<div class="table-responsive">
+  <table class="table table-sm">
+    <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td><%= category.name %></td>
+        <td>
+            <%= link_to 'Click', admin_category_path(category) %>
+            <%= link_to 'Edit', edit_admin_category_path(category) %>
+            <%= link_to 'Delete', admin_category_path(category), method: :delete, data: {Confirm: "Are you sure?"} %>
+        </td>
+      </tr>
+      <% end %> 
+    </tbody>
+  </table>
