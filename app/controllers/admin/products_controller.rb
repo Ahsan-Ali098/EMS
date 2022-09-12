@@ -4,10 +4,17 @@
 module Admin
   # Class for ProductsController
   class ProductsController < ApplicationController
-    before_action :find_product, only: %i[show update edit destroy]
+    before_action :set_product, only: %i[show update edit destroy]
+    helper_method :sort_column, :sort_direction
 
     def index
-      @products = Product.all.page(params[:page])
+      per_page = params[:page]
+      search_param = params[:search]
+      search(search_param, per_page)
+    end
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
     end
 
     def new
@@ -42,7 +49,17 @@ module Admin
 
     private
 
-    def find_product
+    def search(search_param, per_page)
+      @products = if search_param.present?
+                    Product.search_product(search_param)
+                           .page(per_page)
+                  else
+                    Product.all.page(per_page).order(sort_param)
+                  end
+      @products.page(per_page)
+    end
+
+    def set_product
       @product = Product.find(params[:id])
     end
 
@@ -54,6 +71,14 @@ module Admin
         :status,
         :category_id
       )
+    end
+
+    def sort_column
+      Product.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
     end
   end
 end
