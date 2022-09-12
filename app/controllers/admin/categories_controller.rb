@@ -33,6 +33,8 @@ module Admin
       end
     end
 
+    def edit; end
+
     def destroy
       @category.destroy
       redirect_to admin_categories_path
