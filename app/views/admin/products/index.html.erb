@@ -30,9 +30,9 @@
           <td><%= product.category.name %></td>
           <td><%= product.status %></td>
           <td>
-              <%= link_to 'Click', admin_product_path(product) %>
-              <%= link_to 'Edit', edit_admin_product_path(product) %>
-              <%= link_to 'Delete User', admin_product_path(product), method: :delete, data: {Confirm: "Are you sure?"} %>
+            <%= link_to 'Click', admin_product_path(product) %>
+            <%= link_to 'Edit', edit_admin_product_path(product) %>
+            <%= link_to 'Delete User', admin_product_path(product), method: :delete, data: {Confirm: "Are you sure?"} %>
           </td>
         </tr>
         <% end %> 
