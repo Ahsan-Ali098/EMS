@@ -1,12 +1,19 @@
 <div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center sign-up-form mb-5" >
   <h2>Discounts</h2>
-  <p><%= link_to '+ Create', new_admin_discount_path, class: "btn btn-primary" %></p>
   <div class="table-responsive">
+    <%= form_tag admin_discounts_path, method: :get do %>
+    <p><%= link_to('Generate Report', admin_discounts_path(format: :csv), class: "btn btn-success mt-3 mb-3") %></p>
+      <div class="input-group w-25 input-group-sm mb-5">
+        <%= search_field_tag :search, params[:search], placeholder: 'Search', class: 'form-control' %>
+        <%= submit_tag "search", class: "btn btn-primary" %>
+      </div>
+      <p><%= link_to '+ Create', new_admin_discount_path, class: "btn btn-primary" %></p>
+    <% end %>
     <table class="table table-sm">
       <thead>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Discount Value</th>
+          <th scope="col"><%= sortable "id","ID"%></th>
+          <th scope="col"><%= sortable "name","Name"%></th>
+          <th scope="col"><%= sortable "price","Value"%></th>
           <th scope="col">Action</th>
       </thead>
       <tbody>
@@ -24,5 +31,6 @@
         <% end %> 
       </tbody>
     </table>
+    <%= paginate @discounts, theme: 'bootstrap-5' %>
   </div>
 </div>
