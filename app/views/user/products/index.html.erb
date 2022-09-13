@@ -2,12 +2,12 @@
   <h2>Products listing</h2>
   <div class="d-flex flex-wrap justify-content-around">
     <% @products.each do |product| %>
-      <div class="card my-3" style="width: 19rem;">
+      <div class="card my-3">
         <%= image_tag product.image if product.image.attached? %>
         <div class="card-body">
           <h5 class="card-title"><%= product.title %></h5>
           <p class="card-text"><%= product.description %></p>
-          <p class="card-text"><%= product.price %></p>
+          <p class="card-text">Rs: <%= product.price %></p>
           <a href="#" class="btn btn-primary">Add to Cart</a>
         </div>
       </div>
