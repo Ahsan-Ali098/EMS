@@ -3,13 +3,13 @@
 require 'csv'
 module ExportService
   # class UserExport
-  class UserExport
+  class DiscountExport
     def initialize(data)
       @data = data
     end
 
     def to_csv
-      attributes = %w[id user_name email confirmed_at]
+      attributes = %w[id name price]
       CSV.generate(headers: true) do |csv|
         csv << attributes
         @data.each do |user|
