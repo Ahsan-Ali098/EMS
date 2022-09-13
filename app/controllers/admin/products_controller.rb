@@ -75,7 +75,8 @@ module Admin
         :price,
         :description,
         :status,
-        :category_id
+        :category_id,
+        :image
       )
     end
 

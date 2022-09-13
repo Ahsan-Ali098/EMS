@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   validates :password,
             presence: true,
-            format: { with: PASSWORD_FORMAT }
+            format: { with: PASSWORD_FORMAT }, on: :create
 
   validates :user_name, presence: true
   validates :email, presence: true

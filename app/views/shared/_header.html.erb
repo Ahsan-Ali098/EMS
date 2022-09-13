@@ -5,19 +5,52 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Users", admin_users_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Products", admin_products_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Categories", admin_categories_path, class: "nav-link active" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Discounts", admin_discounts_path, class: "nav-link active" %>
-        </li>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex justify-content-end align-items-center">
+        <% if current_user %>
+          <li>
+            <%= current_user.email %>
+          </li>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to "Users", admin_users_path, class: "nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Products", admin_products_path, class: "nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Categories", admin_categories_path, class: "nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Discounts", admin_discounts_path, class: "nav-link active" %>
+            </li>
+            <li>
+              <%= link_to 'Log out', destroy_user_session_path,class: "nav-link active", method: :delete %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Products', user_products_path,class: "nav-link active" %>
+            </li>
+            <li>
+              <%= link_to 'Log out', destroy_user_session_path,class: "nav-link active", method: :delete %>
+            </li>
+          <% end %>
+        <% else %>
+          <div id="navbar">
+            <ul class="nav navbar-nav pull-right">
+              <li>
+                <% link_to 'Home', root_path %>
+              </li>
+              <ul class="nav navbar-nav pull-right">
+                <li>
+                  <%= link_to 'Log In', new_user_session_path, class: "nav-link active" %>
+                </li>
+                <li>
+                  <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link active" %>
+                </li>
+              </ul>
+            </ul>
+          </div>
+        <% end %>
       </ul>
     </div>
   </div>
