@@ -19,10 +19,6 @@ module Admin
       end
     end
 
-    def sort_param
-      "#{sort_column} #{sort_direction}"
-    end
-
     def new
       @product = Product.new
     end
@@ -54,6 +50,10 @@ module Admin
     end
 
     private
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
+    end
 
     def search(search_param, per_page)
       @products = if search_param.present?

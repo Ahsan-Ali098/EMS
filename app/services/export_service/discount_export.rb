@@ -9,7 +9,7 @@ module ExportService
     end
 
     def to_csv
-      attributes = %w[id name price ]
+      attributes = %w[id name price]
       CSV.generate(headers: true) do |csv|
         csv << attributes
         @data.each do |user|

@@ -3,7 +3,7 @@
 # Product
 class Product < ApplicationRecord
   paginates_per 5
-  belongs_to :discount
+  belongs_to :discount, optional: true
   belongs_to :category
   enum status: %i[publish draft pending]
 

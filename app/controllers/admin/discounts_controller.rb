@@ -19,19 +19,17 @@ module Admin
       end
     end
 
-    def sort_param
-      "#{sort_column} #{sort_direction}"
-    end
-
     def new
       @discount = Discount.new
     end
 
     def create
       @discount = Discount.new(discount_params)
-      if @discount.save
-        redirect_to admin_discounts_path
-      else
+      ActiveRecord::Base.transaction do
+        @discount.save!
+        @discount.discount_for_products(params[:discount][:products])
+        redirect_to admin_discounts_path, notice: 'Disocunt is saved. '
+      rescue StandardError
         render 'new'
       end
     end
@@ -39,8 +37,8 @@ module Admin
     def show; end
 
     def update
-      if @discount.update(discount_params)
-        redirect_to admin_discounts_path
+      if @discount.update(product_params)
+        redirect_to admin_products_path
       else
         render 'edit'
       end
@@ -54,6 +52,10 @@ module Admin
     end
 
     private
+
+    def sort_param
+      "#{sort_column} #{sort_direction}"
+    end
 
     def search(search_param, per_page)
       @discounts = if search_param.present?
