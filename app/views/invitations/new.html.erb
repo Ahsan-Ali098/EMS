@@ -1,0 +1,28 @@
+<div class="container-fluid w-25 border rounded shadow mt-5 p-4 text-center sign-up-form">
+  <h2>Invite User</h2>
+  <%= form_for(@user, url: invitations_path(@user), html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: @user %>
+    
+    <div class="field mb-3 text-start">
+      <%= f.label :user_name, class:"form-label" %><br />
+      <%= f.text_field :user_name, autofocus: true,required: true, class: "form-control form-control-lg" %>
+    </div>
+
+    <div class="field mb-3 text-start">
+      <%= f.label :email, class:"form-label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true,id: "typeEmailX", class: "form-control form-control-lg" %>
+    </div>
+
+    <div class="field mb-3 text-start">
+      <%= f.label :password, class:"form-label" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password",required: true, class: "form-control form-control-lg" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Invite" %>
+    </div>
+  <% end %>
+</div>

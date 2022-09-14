@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   namespace :user do
     resources :products
   end
+  resources :invitations, only: %i[new create]
 end
