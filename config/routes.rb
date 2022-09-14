@@ -12,5 +12,8 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :products, only: [:index]
+    resources :order_items, only: %i[create new destroy]
+    resources :carts, only: %i[show destroy]
+    resources :orders
   end
 end

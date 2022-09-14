@@ -3,6 +3,7 @@
 # Product
 class Product < ApplicationRecord
   paginates_per 5
+  has_many :order_items, dependent: :destroy
   belongs_to :discount, optional: true
   belongs_to :category
   has_one_attached :image
