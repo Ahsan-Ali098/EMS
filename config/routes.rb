@@ -9,4 +9,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :discounts
   end
+
+  namespace :user do
+    resources :products
+  end
 end

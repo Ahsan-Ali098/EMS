@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   paginates_per 5
   belongs_to :discount, optional: true
   belongs_to :category
+  has_one_attached :image
   enum status: %i[publish draft pending]
 
   def self.search_product(search)

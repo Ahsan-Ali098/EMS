@@ -5,6 +5,8 @@ class User < ApplicationRecord
   paginates_per 5
   attr_writer :login
 
+  enum role: %i[client admin]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,7 +20,7 @@ class User < ApplicationRecord
 
   validates :password,
             presence: true,
-            format: { with: PASSWORD_FORMAT }
+            format: { with: PASSWORD_FORMAT }, on: :create
 
   validates :user_name, presence: true
   validates :email, presence: true
