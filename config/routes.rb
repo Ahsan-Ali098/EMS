@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   end
 
   namespace :user do
-    resources :products
+    resources :products, only: [:index]
   end
 end
