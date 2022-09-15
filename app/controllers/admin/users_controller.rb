@@ -6,7 +6,7 @@ module Admin
   class UsersController < ApplicationController
     before_action :find_user, only: %i[show update edit destroy]
     helper_method :sort_column, :sort_direction
-
+    before_action :current_cart
     def index
       per_page = params[:page]
       search_param = params[:search]

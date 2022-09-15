@@ -4,6 +4,7 @@
 class User
   # Class Orders
   class OrdersController < ApplicationController
+    before_action :current_cart
     def index
       @orders = Order.all
     end
@@ -23,9 +24,9 @@ class User
         item.cart_id = nil
       end
       @order.save
-      Cart.destroy(session[:cart_id])
-      session[:cart_id] = nil
-      redirect_to root_path
+      # Cart.destroy(@current_cart.id)
+      @current_cart.empty
+      redirect_to admin_orders_path
     end
 
     private
