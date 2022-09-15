@@ -5,6 +5,7 @@ class User < ApplicationRecord
   paginates_per 5
   attr_writer :login
 
+  has_one :cart
   enum role: %i[client admin]
 
   # Include default devise modules. Others available are:
