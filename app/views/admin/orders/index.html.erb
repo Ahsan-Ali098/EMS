@@ -1,0 +1,23 @@
+<div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center sign-up-form mb-5" >
+  <h2>Orders</h2>
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead>
+          <th scope="col">ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">LastName</th>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.firstname %></td>
+          <td><%= order.lastname %></td>
+          <td>
+          </td>
+        </tr>
+        <% end %> 
+      </tbody>
+    </table>
+  </div>
+</div>
