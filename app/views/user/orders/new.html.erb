@@ -1,0 +1,23 @@
+<div class="container-fluid w-25 border rounded shadow mt-5 p-4 text-center">
+  <%= form_for [:user,@order] do |f| %>
+  <div class="field mb-3 text-start">
+    <%= f.label :firstname %><br>
+    <%= f.text_field :firstname, required: true, autofocus: true %>
+  </div>
+  <div class="field mb-3 text-start">
+    <%= f.label :lastname %><br>
+    <%= f.text_field :lastname, required: true, autofocus: true %>
+  </div>
+  <div class="field mb-3 text-start">
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+  <div class="field mb-3 text-start">
+    <%= f.label :address %><br>
+    <%= f.text_area :address %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
