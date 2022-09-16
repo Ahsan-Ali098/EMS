@@ -37,8 +37,8 @@ module Admin
     def show; end
 
     def update
-      if @discount.update(product_params)
-        redirect_to admin_products_path
+      if @discount.update(discount_params)
+        redirect_to admin_dicounts_path
       else
         render 'edit'
       end

@@ -6,15 +6,18 @@ class Cart < ApplicationRecord
   has_many :products, through: :order_items
   belongs_to :user
 
-  def sub_total
-    sum = 0
+  def sub_total (dis= nil)
+    total = 0
+    byebug
     order_items.each do |order_item|
-      sum += order_item.total_price
+      total += order_item.total_price
     end
-    sum
+      discount =Discount.apply_discount(dis) if dis
+    total-=discount.to_i
   end
 
   def empty
     order_items.destroy_all
+    total = 0
   end
 end
