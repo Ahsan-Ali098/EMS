@@ -6,6 +6,8 @@
           <th scope="col">ID</th>
           <th scope="col">First Name</th>
           <th scope="col">LastName</th>
+          <th scope="col">Email</th>
+          <th scope="col">Payment Method</th>
       </thead>
       <tbody>
         <% @orders.each do |order| %>
@@ -13,6 +15,8 @@
           <td><%= order.id %></td>
           <td><%= order.firstname %></td>
           <td><%= order.lastname %></td>
+          <td><%= order.email %></td>
+          <td><%= order.payment %></td>
           <td>
           </td>
         </tr>

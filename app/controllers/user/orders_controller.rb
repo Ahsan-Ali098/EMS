@@ -4,6 +4,7 @@
 class User
   # Class Orders
   class OrdersController < ApplicationController
+    before_action :set_order, only: %i[show]
     before_action :current_cart
     def index
       @orders = Order.all
@@ -31,8 +32,12 @@ class User
 
     private
 
+    def set_order
+      @order = Order.find(params[:id])
+    end
+
     def order_params
-      params.require(:order).permit(:firstname, :lastname, :email, :address)
+      params.require(:order).permit(:firstname, :lastname, :email, :address, :payment)
     end
   end
 end
