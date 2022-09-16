@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   belongs_to :category
   has_one_attached :image
   enum status: %i[publish draft pending]
+  validates :title, :price, :description, presence: true
 
   def self.search_product(search)
     Product.where('cast(id as text) LIKE :value or lower(products.title) LIKE :value ',

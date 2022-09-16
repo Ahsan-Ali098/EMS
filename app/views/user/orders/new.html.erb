@@ -10,11 +10,11 @@
   </div>
   <div class="field mb-3 text-start">
     <%= f.label :email %><br>
-    <%= f.email_field :email %>
+    <%= f.email_field, required: true :email %>
   </div>
   <div class="field mb-3 text-start">
     <%= f.label :address %><br>
-    <%= f.text_area :address %>
+    <%= f.text_area, required: true :address %>
   </div>
 
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
