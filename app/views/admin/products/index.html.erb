@@ -12,7 +12,6 @@
     <p><%= link_to '+ Create', new_admin_product_path, class: "btn btn-primary" %></p>
     <table class="table table-sm">
       <thead>
-        <th scope="col">''</th>
           <th scope="col"><%= sortable "id","ID"%></th>
           <th scope="col"><%= sortable "title","Title" %></th>
           <th scope="col"><%= sortable "price","Price" %></th>
@@ -23,16 +22,15 @@
       <tbody>
         <% @products.each do |product| %>
         <tr>
-          <td><input type="checkbox" name="EMS"></td>
           <td><%= product.id %></td>
           <td><%= product.title %></td>
           <td><%= product.price %></td>
           <td><%= product.category.name %></td>
           <td><%= product.status %></td>
           <td>
-            <%= link_to 'Click', admin_product_path(product) %>
+            <%= link_to 'Show', admin_product_path(product) %>
             <%= link_to 'Edit', edit_admin_product_path(product) %>
-            <%= link_to 'Delete User', admin_product_path(product), method: :delete, data: {Confirm: "Are you sure?"} %>
+            <%= link_to 'Delete', admin_product_path(product), method: :delete, data: {Confirm: "Are you sure?"} %>
           </td>
         </tr>
         <% end %> 

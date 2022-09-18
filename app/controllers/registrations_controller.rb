@@ -25,4 +25,8 @@ class RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:user_name, :email, :password, :password_confirmation) }
     devise_parameter_sanitizer.permit :sign_in, keys: %i[login password]
   end
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 end
