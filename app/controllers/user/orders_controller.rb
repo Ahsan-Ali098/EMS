@@ -22,11 +22,9 @@ class User
       @order = Order.new(order_params)
       @current_cart.order_items.each do |item|
         @order.order_items << item
-        item.cart_id = nil
       end
-      @order.save
-      # Cart.destroy(@current_cart.id)
       @current_cart.empty
+      #############
       redirect_to admin_orders_path
     end
 
