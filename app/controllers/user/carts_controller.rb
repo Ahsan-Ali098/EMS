@@ -15,11 +15,5 @@ class User
       session[:cart_id] = nil
       redirect_to root_path
     end
-
-    def discount
-      total = current_cart.sub_total(params[:cart][:coupon])
-      redirect_to 'show'
-    end
-
   end
 end

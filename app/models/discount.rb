@@ -17,8 +17,4 @@ class Discount < ApplicationRecord
     products = products.compact.reject!(&:empty?)
     Product.where(id: products).update_all(discount_id: id)
   end
-
-  def self.apply_discount(params)
-    price = Discount.find_by(name: params).price
-  end
 end
