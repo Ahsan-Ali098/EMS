@@ -58,7 +58,7 @@ module Admin
     def search(search_param, per_page)
       @products = if search_param.present?
                     Product.search_product(search_param)
-                           .page(per_page)
+                      .page(per_page)
                   else
                     Product.all.page(per_page).order(sort_param)
                   end
@@ -76,7 +76,7 @@ module Admin
         :description,
         :status,
         :category_id,
-        :image
+        :image,
       )
     end
 

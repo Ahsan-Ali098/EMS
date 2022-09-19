@@ -60,7 +60,7 @@ module Admin
     def search(search_param, per_page)
       @discounts = if search_param.present?
                      Discount.search(search_param)
-                             .page(per_page)
+                       .page(per_page)
                    else
                      Discount.all.page(per_page).order(sort_param)
                    end

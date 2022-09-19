@@ -7,6 +7,7 @@ module Admin
     before_action :find_user, only: %i[show update edit destroy]
     helper_method :sort_column, :sort_direction
     before_action :current_cart
+
     def index
       per_page = params[:page]
       search_param = params[:search]
@@ -56,7 +57,7 @@ module Admin
     def search(search_param, per_page)
       @users = if search_param.present?
                  User.search_user(search_param)
-                     .page(per_page)
+                   .page(per_page)
                else
                  User.all.page(per_page).order(sort_param)
                end
