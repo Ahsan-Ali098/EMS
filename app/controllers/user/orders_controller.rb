@@ -25,7 +25,7 @@ class User
       end
       @order.save
       @current_cart.empty
-      redirect_to admin_orders_path
+      redirect_to root_path
     end
 
     private

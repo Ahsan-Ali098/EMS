@@ -5,15 +5,18 @@ class User
   # OrderItemsController
   class OrderItemsController < ApplicationController
     before_action :current_cart
+    before_action :current_order
 
     def create
       result = CreateOrderItem.call(
         product_id: params[:product_id],
-        current_cart: @current_cart,
+        current_cart: @current_cart, current_order: current_order
       )
       @order_item = result.order_item
       if result.success?
         redirect_to user_cart_path(@current_cart)
+      else
+        redirect_to user_products_path, alert: 'Error: Something went wrong.'
       end
     end
 
@@ -27,6 +30,14 @@ class User
 
     def order_item_params
       params.require(:order_item).permit(:quantity, :product_id, :cart_id)
+    end
+
+    def current_order
+      if session[:order_id].nil?
+        Order.new
+      else
+        Order.find(session[:order_id])
+      end
     end
   end
 end

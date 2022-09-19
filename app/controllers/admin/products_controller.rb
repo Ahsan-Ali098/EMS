@@ -8,18 +8,13 @@ module Admin
     helper_method :sort_column, :sort_direction
 
     def index
-      result  = AdminProduct.call(
-        per_page: params[:page],
-        search_param: params[:search],
-        sort: params[:sort],
-        direction: params[:direction]
-      )
+      result = AdminProduct.call(per_page: params[:page], search_param: params[:search], sort: params[:sort],
+                                 direction: params[:direction])
+
       @products = result.products
       respond_to do |format|
         format.html
-        format.csv do
-          send_data ExportService::ProductExport.new(Product.all).to_csv, filename: "productsinfo-#{Date.today}.csv"
-        end
+        format.csv { generate_csv }
       end
     end
 
@@ -59,6 +54,10 @@ module Admin
       @product = Product.find(params[:id])
     end
 
+    def generate_csv
+      send_data ExportService::ProductExport.new(Product.all).to_csv, filename: "productsinfo-#{Date.today}.csv"
+    end
+
     def product_params
       params.require(:product).permit(
         :title,
@@ -66,7 +65,7 @@ module Admin
         :description,
         :status,
         :category_id,
-        :image
+        :image,
       )
     end
 
