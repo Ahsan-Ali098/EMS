@@ -64,8 +64,8 @@ end
 gem 'bootstrap', '~> 5.2.0'
 gem 'bootstrap5-kaminari-views'
 gem 'devise'
+gem 'interactor-rails'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'pundit'
-gem "interactor-rails"
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
