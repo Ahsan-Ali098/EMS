@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_in, keys: %i[login password]
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     current_user.admin? ? admin_users_path : user_products_path
   end
 end

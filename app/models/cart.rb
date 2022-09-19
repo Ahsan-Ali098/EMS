@@ -16,6 +16,5 @@ class Cart < ApplicationRecord
 
   def empty
     order_items.destroy_all
-    total = 0
   end
 end

@@ -1,4 +1,5 @@
 <div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center mb-5">
+  <h4> Customer Information</h4>
   <%= form_for [:user,@order] do |f| %>
     <div>
       <%= f.label :first_name %><br>
@@ -16,9 +17,6 @@
       <%= f.label :address %><br>
       <%= f.text_area :address, required: true %>
     </div>
-    <!-- <div class="field mb-3 text-start">
-      <%#= f.submit %>
-    </div> -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Select Payment Method
     </button>
@@ -47,4 +45,8 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div id='coupon'>
+  <%= render 'coupon', coupon: @coupon %>
 </div>

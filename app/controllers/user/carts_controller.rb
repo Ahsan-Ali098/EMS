@@ -4,11 +4,9 @@
 class User
   # Carts
   class CartsController < ApplicationController
-    before_action :current_cart
+    before_action :current_cart, only: %i[show]
 
-    def show
-      @cart = @current_cart
-    end
+    def show; end
 
     def destroy
       @current_cart.empty

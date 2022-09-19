@@ -2,7 +2,7 @@
   <h2>Your Cart</h2>
   <div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center  mb-5">
     <ul>
-      <% @cart.order_items.each do |order_item| %>
+      <% @current_cart.order_items.each do |order_item| %>
         <h4>
           <li>
             Item: <%= order_item.product.title %>

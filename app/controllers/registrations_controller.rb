@@ -3,9 +3,6 @@
 # Registration Controller
 class RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
-  def new
-    super
-  end
 
   def create
     super
@@ -13,10 +10,6 @@ class RegistrationsController < Devise::RegistrationsController
       @cart = Cart.new(user_id: @user.id)
       @cart.save
     end
-  end
-
-  def update
-    super
   end
 
   protected

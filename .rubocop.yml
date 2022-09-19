@@ -130,4 +130,3 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 Lint/DuplicateMethods:
   Enabled: false
-  

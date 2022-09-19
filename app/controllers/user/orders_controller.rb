@@ -7,14 +7,14 @@ class User
     before_action :set_order, only: %i[show]
     before_action :current_cart
     def index
-      @orders = Order.all
+      @orders = Order.order(name: :desc)
     end
 
-    def show
-      @order = Order.find(params[:id])
-    end
+    def show; end
 
     def new
+      value = Discount.validate_coupon(params[:coupon], current_cart) if params[:coupon].present?
+      @coupon = @current_cart.sub_total.to_i - value.to_i
       @order = Order.new
     end
 
@@ -24,7 +24,6 @@ class User
         @order.order_items << item
       end
       @current_cart.empty
-      #############
       redirect_to admin_orders_path
     end
 
