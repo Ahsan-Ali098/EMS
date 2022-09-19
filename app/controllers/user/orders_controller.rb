@@ -23,6 +23,7 @@ class User
       @current_cart.order_items.each do |item|
         @order.order_items << item
       end
+      @order.save
       @current_cart.empty
       redirect_to admin_orders_path
     end
