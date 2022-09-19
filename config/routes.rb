@@ -17,6 +17,6 @@ Rails.application.routes.draw do
     resources :carts, only: %i[show destroy]
     resources :orders
   end
-
   post 'user/orders/discount', to: 'user/orders#discount', as: 'orders_coupon'
+  resources :invitations, only: %i[new create]
 end
