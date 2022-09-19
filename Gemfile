@@ -67,5 +67,5 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'pundit'
-gem "interactor"
+gem "interactor-rails"
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
