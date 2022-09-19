@@ -6,7 +6,7 @@ class User
   class ProductsController < ApplicationController
     before_action :current_cart
     def index
-      @products = Product.all
+      @products = Product.order(name: :desc)
     end
   end
 end

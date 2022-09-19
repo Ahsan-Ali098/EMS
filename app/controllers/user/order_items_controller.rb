@@ -5,6 +5,7 @@ class User
   # OrderItemsController
   class OrderItemsController < ApplicationController
     before_action :current_cart
+    
     def create # rubocop:disable Metrics/MethodLength
       # Find associated product and current cart
       chosen_product = Product.find(params[:product_id])
