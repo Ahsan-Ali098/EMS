@@ -3,6 +3,14 @@
 # Application Helper
 #
 module ApplicationHelper
+  def current_order
+    if session[:order_id].nil?
+      Order.new
+    else
+      Order.find(session[:order_id])
+    end
+  end
+
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = column == sort_column && sort_direction == 'asc' ? 'desc' : 'asc'

@@ -17,4 +17,14 @@ class Discount < ApplicationRecord
     products = products.compact.reject!(&:empty?)
     Product.where(id: products).update_all(discount_id: id)
   end
+
+  def self.validate_coupon(coupon, cart)
+    value = Discount.find_by(name: coupon).present? ? Discount.find_by(name: coupon).price : 0
+
+    if value.positive?
+      count = cart.products.where('discount_id = ?', Discount.find_by(name: coupon).id).count
+      value *= count
+    end
+    value
+  end
 end

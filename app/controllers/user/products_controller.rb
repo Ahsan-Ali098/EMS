@@ -4,8 +4,9 @@
 class User
   # Class for ProductsController
   class ProductsController < ApplicationController
+    before_action :current_cart
     def index
-      @products = Product.all
+      @products = Product.order(title: :desc)
     end
   end
 end

@@ -23,7 +23,7 @@
           <td><%= discount.name %></td>
           <td><%= discount.price %></td>
           <td>
-              <%= link_to 'Click', admin_discount_path(discount) %>
+              <%= link_to 'Show', admin_discount_path(discount) %>
               <%= link_to 'Edit', edit_admin_discount_path(discount) %>
               <%= link_to 'Delete', admin_discount_path(discount), method: :delete, data: {Confirm: "Are you sure?"} %>
           </td>

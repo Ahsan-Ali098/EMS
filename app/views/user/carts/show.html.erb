@@ -1,0 +1,33 @@
+<div class="container-fluid w-75 border rounded shadow mt-5 p-4 mb-5">
+  <h2>Your Cart</h2>
+  <div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center  mb-5">
+    <ul>
+      <% @current_cart.order_items.each do |order_item| %>
+        <h4>
+          <li>
+            Item: <%= order_item.product.title %>
+          </li>
+        </h4>
+        <div>
+          Price: <%= number_to_currency(order_item.product.price, unit:'Rs. ') %>
+        </div>
+        <div>
+          Quantity: <%= order_item.quantity %>
+        </div>
+        <div>
+          Total Price: <%= number_to_currency(order_item.total_price, unit:'Rs.') %>
+        </div>
+        <div>
+          <%= link_to "Remove item", user_order_item_path(order_item), method: :delete %>
+        </div>
+      <% end %>
+    </ul>
+    <h5>Sub total: <%= number_to_currency(@current_cart.sub_total, unit: 'Rs.') %></h5>
+    <% if @current_cart.sub_total == 0 %>
+      <p>Your cart is Empty</p>
+    <% else %>
+    <%= link_to "Proceed to checkout", new_user_order_path %>
+    <% end %>
+  </div>
+    <%= link_to "Empty cart", user_cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"}%>
+</div>

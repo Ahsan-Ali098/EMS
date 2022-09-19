@@ -14,7 +14,7 @@
           <td><%= category.id %></td>
           <td><%= category.name %></td>
           <td>
-              <%= link_to 'Click', admin_category_path(category) %>
+              <%= link_to 'Show', admin_category_path(category) %>
               <%= link_to 'Edit', edit_admin_category_path(category) %>
               <%= link_to 'Delete', admin_category_path(category), method: :delete, data: {Confirm: "Are you sure?"} %>
           </td>
