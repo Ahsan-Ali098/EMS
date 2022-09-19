@@ -29,5 +29,5 @@
     <%= link_to "Proceed to checkout", new_user_order_path %>
     <% end %>
   </div>
-    <%#= link_to "Empty cart", user_cart_empty_path(@current_cart) %>
+    <%= link_to "Empty cart", user_cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"}%>
 </div>
