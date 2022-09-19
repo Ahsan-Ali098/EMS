@@ -1,5 +1,6 @@
 <div class="container-fluid w-75 border rounded shadow mt-5 p-4 mb-5">
   <h2>Your Cart</h2>
+  <%= link_to "Back", user_products_path  %> 
   <div class="container-fluid w-75 border rounded shadow mt-5 p-4 text-center  mb-5">
     <ul>
       <% @current_cart.order_items.each do |order_item| %>
