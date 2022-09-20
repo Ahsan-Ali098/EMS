@@ -2,7 +2,6 @@
 
 class AdminProduct < ApplicationInteractor
   delegate :per_page, :search_param, :sort, :direction, :search, to: :context
-  delegate :products, to: :context
 
   def call
     search(search_param, per_page)
