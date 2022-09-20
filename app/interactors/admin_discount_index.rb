@@ -12,11 +12,11 @@ class AdminDiscountIndex < ApplicationInteractor
 
   def search(search_param, per_page)
     context.discounts = if search_param.present?
-                   Discount.search(search_param)
-                     .page(per_page)
-                 else
-                   Discount.all.page(per_page).order(sort_param)
-                 end
+                          Discount.search(search_param)
+                            .page(per_page)
+                        else
+                          Discount.all.page(per_page).order(sort_param)
+                        end
     discounts.page(per_page)
   end
 
@@ -31,5 +31,4 @@ class AdminDiscountIndex < ApplicationInteractor
   def sort_direction
     %w[asc desc].include?(direction) ? direction : 'asc'
   end
-
 end

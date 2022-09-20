@@ -9,15 +9,12 @@ module Admin
 
     def index
       result = AdminDiscountIndex.call(
-        per_page: params[:page],
-        search_param: params[:search],
-        sort: params[:sort],
-        direction: params[:direction]
+        per_page: params[:page], search_param: params[:search], sort: params[:sort], direction: params[:direction],
       )
       @discounts = result.discounts
       respond_to do |format|
         format.html
-        format.csv {generate_csv}
+        format.csv { generate_csv }
       end
     end
 
