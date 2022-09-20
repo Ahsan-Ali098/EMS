@@ -2,7 +2,6 @@
 
 class CreateOrderItem < ApplicationInteractor
   delegate :product_id, :current_cart, :current_order, to: :context
-  delegate :order_item, to: :context
 
   def call
     context.order_item = if current_cart.products.include?(chosen_product)
