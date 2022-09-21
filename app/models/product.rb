@@ -12,6 +12,6 @@ class Product < ApplicationRecord
 
   def self.search_product(search)
     Product.where('cast(id as text) LIKE :value or lower(products.title) LIKE :value ',
-                  value: "%#{search.downcase}%")
+                  value: "%#{search&.downcase}%")
   end
 end

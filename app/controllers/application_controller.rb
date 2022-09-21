@@ -2,15 +2,14 @@
 
 # Application Controller
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
-  include ApplicationHelper
   include Pundit::Authorization
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
 
   def current_cart
-    @current_cart = Cart.find_by(user_id: current_user.id)
+    @current_cart = Cart.find_or_create_by(user_id: current_user.id)
   end
 
   protected

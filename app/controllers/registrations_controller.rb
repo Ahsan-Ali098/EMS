@@ -6,10 +6,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    if @user.save
-      @cart = Cart.new(user_id: @user.id)
-      @cart.save
-    end
+    return unless @user.save
+
+    @cart = Cart.new(user_id: @user.id)
+    @cart.save
   end
 
   protected

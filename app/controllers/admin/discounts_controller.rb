@@ -8,14 +8,13 @@ module Admin
     helper_method :sort_column, :sort_direction
 
     def index
-      per_page = params[:page]
-      search_param = params[:search]
-      search(search_param, per_page)
+      result = AdminDiscountIndex.call(
+        per_page: params[:page], search_param: params[:search], sort: params[:sort], direction: params[:direction],
+      )
+      @discounts = result.discounts
       respond_to do |format|
         format.html
-        format.csv do
-          send_data ExportService::DiscountExport.new(Discount.all).to_csv, filename: "discountsinfo-#{Date.today}.csv"
-        end
+        format.csv { generate_csv }
       end
     end
 
@@ -53,22 +52,12 @@ module Admin
 
     private
 
-    def sort_param
-      "#{sort_column} #{sort_direction}"
-    end
-
-    def search(search_param, per_page)
-      @discounts = if search_param.present?
-                     Discount.search(search_param)
-                       .page(per_page)
-                   else
-                     Discount.all.page(per_page).order(sort_param)
-                   end
-      @discounts.page(per_page)
-    end
-
     def set_discount
       @discount = Discount.find(params[:id])
+    end
+
+    def generate_csv
+      send_data ExportService::DiscountExport.new(Discount.all).to_csv, filename: "discountsinfo-#{Date.today}.csv"
     end
 
     def discount_params

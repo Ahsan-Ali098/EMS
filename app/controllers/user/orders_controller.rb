@@ -23,9 +23,10 @@ class User
       @current_cart.order_items.each do |item|
         @order.order_items << item
       end
+      @order.user_id = current_user.id
       @order.save
       @current_cart.empty
-      redirect_to admin_orders_path
+      redirect_to root_path
     end
 
     private
@@ -35,6 +36,7 @@ class User
     end
 
     def order_params
+      # byebug
       params.require(:order).permit(:firstname, :lastname, :email, :address, :payment)
     end
   end

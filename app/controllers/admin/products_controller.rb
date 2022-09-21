@@ -8,14 +8,13 @@ module Admin
     helper_method :sort_column, :sort_direction
 
     def index
-      per_page = params[:page]
-      search_param = params[:search]
-      search(search_param, per_page)
+      result = AdminProduct.call(per_page: params[:page], search_param: params[:search], sort: params[:sort],
+                                 direction: params[:direction])
+
+      @products = result.products
       respond_to do |format|
         format.html
-        format.csv do
-          send_data ExportService::ProductExport.new(Product.all).to_csv, filename: "productsinfo-#{Date.today}.csv"
-        end
+        format.csv { generate_csv }
       end
     end
 
@@ -51,22 +50,12 @@ module Admin
 
     private
 
-    def sort_param
-      "#{sort_column} #{sort_direction}"
-    end
-
-    def search(search_param, per_page)
-      @products = if search_param.present?
-                    Product.search_product(search_param)
-                      .page(per_page)
-                  else
-                    Product.all.page(per_page).order(sort_param)
-                  end
-      @products.page(per_page)
-    end
-
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def generate_csv
+      send_data ExportService::ProductExport.new(Product.all).to_csv, filename: "productsinfo-#{Date.today}.csv"
     end
 
     def product_params

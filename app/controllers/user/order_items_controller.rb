@@ -5,26 +5,19 @@ class User
   # OrderItemsController
   class OrderItemsController < ApplicationController
     before_action :current_cart
-    
-    def create # rubocop:disable Metrics/MethodLength
-      # Find associated product and current cart
-      chosen_product = Product.find(params[:product_id])
-      current_cart = @current_cart
+    before_action :current_order
 
-      if current_cart.products.include?(chosen_product)
-        # Find the order_item with the chosen_product
-        @order_item = current_cart.order_items.find_by(product_id: chosen_product)
-        # Iterate the order_item's quantity by one
-        @order_item.quantity += 1
+    def create
+      result = CreateOrderItem.call(
+        product_id: params[:product_id],
+        current_cart: @current_cart, current_order: current_order
+      )
+      @order_item = result.order_item
+      if result.success?
+        redirect_to user_cart_path(@current_cart)
       else
-        @order_item = OrderItem.new
-        @order_item.cart = current_cart
-        @order_item.product = chosen_product
-        @order_item.order = current_order
+        redirect_to user_products_path, alert: 'Error: Something went wrong.'
       end
-      # Save and redirect to cart show path
-      @order_item.save
-      redirect_to user_cart_path(current_cart)
     end
 
     def destroy
@@ -37,6 +30,10 @@ class User
 
     def order_item_params
       params.require(:order_item).permit(:quantity, :product_id, :cart_id)
+    end
+
+    def current_order
+      Order.find_or_create_by(user_id: params[:id])
     end
   end
 end

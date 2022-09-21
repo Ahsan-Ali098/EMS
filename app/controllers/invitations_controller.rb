@@ -8,9 +8,7 @@ class InvitationsController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.user_name = @user.user_name.to_s
-    @password = @user.password
-    InviteMailer.send_invitation(@user, @password).deliver_later if @user.save
+    InviteMailer.send_invitation(@user, @user.password).deliver_later if @user.save
     redirect_to admin_users_path
   end
 
