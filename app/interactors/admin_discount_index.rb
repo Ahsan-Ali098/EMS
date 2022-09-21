@@ -11,13 +11,10 @@ class AdminDiscountIndex < ApplicationInteractor
   private
 
   def search(search_param, per_page)
-    context.discounts = if search_param.present?
-                          Discount.search(search_param)
-                            .page(per_page)
-                        else
-                          Discount.all.page(per_page).order(sort_param)
-                        end
-    discounts.page(per_page)
+    scope = Discount
+    scope = scope.search(search_param) if search_param.present?
+    scope = scope.page(per_page).order(sort_param)
+    context.discounts = scope
   end
 
   def sort_param

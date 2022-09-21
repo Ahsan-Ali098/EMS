@@ -10,13 +10,10 @@ class AdminProduct < ApplicationInteractor
   private
 
   def search(search_param, per_page)
-    context.products = if search_param.present?
-                         Product.search_product(search_param)
-                           .page(per_page)
-                       else
-                         Product.all.page(per_page).order(sort_param)
-                       end
-    context.products.page(per_page)
+    scope = Product
+    scope = scope.search(search_param) if search_param.present?
+    scope = scope.page(per_page).order(sort_param)
+    context.products = scope
   end
 
   def sort_param
