@@ -33,11 +33,7 @@ class User
     end
 
     def current_order
-      if session[:order_id].nil?
-        Order.new
-      else
-        Order.find(session[:order_id])
-      end
+      Order.find_or_create_by(user_id: params[:id])
     end
   end
 end
