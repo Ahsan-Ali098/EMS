@@ -67,6 +67,6 @@ gem 'devise'
 gem 'interactor-rails'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'letter_opener', group: :development
 gem 'pundit'
-gem "letter_opener", group: :development
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
