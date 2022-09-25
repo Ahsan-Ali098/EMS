@@ -8,6 +8,7 @@
           <th scope="col">LastName</th>
           <th scope="col">Email</th>
           <th scope="col">Payment Method</th>
+          <th> Action </th>
       </thead>
       <tbody>
         <% @orders.each do |order| %>
@@ -17,6 +18,7 @@
           <td><%= order.lastname %></td>
           <td><%= order.email %></td>
           <td><%= order.payment %></td>
+          <td><%= link_to 'Show Order', admin_order_path(order) %></td>
         </tr>
         <% end %> 
       </tbody>
