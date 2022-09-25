@@ -5,12 +5,11 @@ class User
   # OrderItemsController
   class OrderItemsController < ApplicationController
     before_action :current_cart
-    before_action :current_order
 
     def create
       result = CreateOrderItem.call(
         product_id: params[:product_id],
-        current_cart: @current_cart, current_order: current_order
+        current_cart: @current_cart,
       )
       @order_item = result.order_item
       if result.success?
@@ -32,8 +31,9 @@ class User
       params.require(:order_item).permit(:quantity, :product_id, :cart_id)
     end
 
-    def current_order
-      Order.find_or_create_by(user_id: params[:id])
-    end
+    # def current_order
+    #   byebug
+    #   Order.find_or_create_by(user_id: current_user.id)
+    # end
   end
 end

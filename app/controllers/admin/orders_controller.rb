@@ -8,5 +8,9 @@ module Admin
     def index
       @orders = Order.all.order(firstname: :desc)
     end
+
+    def show
+      @order = Order.find(params[:id])
+    end
   end
 end

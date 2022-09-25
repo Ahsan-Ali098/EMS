@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_order
+    order = Order.find_or_create_by(user_id: current_user.id)
+    if order.status == 'complete'
+      Order.create(user_id: current_user.id)
+    else
+      order
+    end
+  end
+
   def current_cart
     @current_cart = Cart.find_or_create_by(user_id: current_user.id)
   end
