@@ -30,10 +30,5 @@ class User
     def order_item_params
       params.require(:order_item).permit(:quantity, :product_id, :cart_id)
     end
-
-    # def current_order
-    #   byebug
-    #   Order.find_or_create_by(user_id: current_user.id)
-    # end
   end
 end
