@@ -30,8 +30,11 @@ class User
       end
       order.status = 0
       order.save
-      redirect_to user_order_path(order) if order.payment == 'card'
-      redirect_to root_path
+      if order.payment == 'card'
+        redirect_to user_order_path(order)
+      else
+        redirect_to root_path
+      end
     end
 
     private
