@@ -66,6 +66,7 @@ gem 'bootstrap5-kaminari-views'
 gem 'devise'
 gem 'interactor-rails'
 gem 'jquery-rails'
+gem 'jwt'
 gem 'kaminari'
 gem 'letter_opener', group: :development
 gem 'pundit'
