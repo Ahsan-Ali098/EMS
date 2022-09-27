@@ -19,10 +19,10 @@
       <tbody>
         <% @users.each do |user| %>
         <tr>
-          <td><%= user.id %> </td>
+          <td><%= user.id %></td>
           <td><%= user.user_name %></td>
-          <td><%= user.email %> </td>
-          <td>Client</td>
+          <td><%= user.email %></td>
+          <td><%= user.role %></td>
           <td>
               <%= link_to "Show", admin_user_path(user) %>
               <%= link_to "Edit", edit_admin_user_path(user) %>

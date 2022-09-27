@@ -5,7 +5,7 @@ class User < ApplicationRecord
   paginates_per 5
   attr_writer :login
 
-  has_one :order
+  has_many :orders, dependent: :nullify
   has_one :cart, dependent: :destroy
   enum role: %i[client admin]
 

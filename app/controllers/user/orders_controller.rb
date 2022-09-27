@@ -6,6 +6,7 @@ class User
   class OrdersController < ApplicationController
     before_action :set_order, only: %i[show]
     before_action :current_cart
+
     def index
       @orders = Order.order(name: :desc)
     end
@@ -19,14 +20,21 @@ class User
     end
 
     def create
-      @order = Order.new(order_params)
+      order = current_order
+      order.price = @current_cart.sub_total
+      order.update(order_params)
       @current_cart.order_items.each do |item|
-        @order.order_items << item
+        order.order_items << item
+        item.cart_id = nil
+        item.save
       end
-      @order.user_id = current_user.id
-      @order.save
-      @current_cart.empty
-      redirect_to root_path
+      order.status = 0
+      order.save
+      if order.payment == 'card'
+        redirect_to user_order_path(order)
+      else
+        redirect_to root_path
+      end
     end
 
     private
@@ -36,7 +44,6 @@ class User
     end
 
     def order_params
-      # byebug
       params.require(:order).permit(:firstname, :lastname, :email, :address, :payment)
     end
   end
