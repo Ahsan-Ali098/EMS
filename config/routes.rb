@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     post :auth, to: 'authentication#create'
     namespace :admin do
       resources :users
+      resources :products
     end
   end
 end
