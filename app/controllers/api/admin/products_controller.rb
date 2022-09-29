@@ -1,73 +1,53 @@
 # frozen_string_literal: true
 
-# Product Controller
-module Admin
-  # Class for ProductsController
-  class ProductsController < ApplicationController
-    before_action :set_product, only: %i[show update edit destroy]
-    helper_method :sort_column, :sort_direction
+module Api
+  # Product Controller
+  module Admin
+    # Class for ProductsController
+    class ProductsController < ApplicationController
+      before_action :set_product, only: %i[show update edit destroy]
 
-    def index
-      @products = Product.all(name: :desc)
-    end
-
-    def new
-      @product = Product.new
-    end
-
-    def create
-      @product = Product.new(product_params)
-      if @product.save
-        redirect_to admin_products_path
-      else
-        render 'new'
+      def index
+        @products = Product.all
       end
-    end
 
-    def show; end
-
-    def update
-      if @product.update(product_params)
-        redirect_to admin_products_path
-      else
-        render 'edit'
+      def new
+        @product = Product.new
       end
-    end
 
-    def edit; end
+      def create
+        @product = Product.create(product_params)
+      end
 
-    def destroy
-      @product.destroy
-      redirect_to admin_products_path
-    end
+      def show; end
 
-    private
+      def update
+        @product.update(product_params)
+      end
 
-    def set_product
-      @product = Product.find(params[:id])
-    end
+      def edit; end
 
-    def generate_csv
-      send_data ExportService::ProductExport.new(Product.all).to_csv, filename: "productsinfo-#{Date.today}.csv"
-    end
+      def destroy
+        @product.destroy
+      end
 
-    def product_params
-      params.require(:product).permit(
-        :title,
-        :price,
-        :description,
-        :status,
-        :category_id,
-        :image,
-      )
-    end
+      private
 
-    def sort_column
-      Product.column_names.include?(params[:sort]) ? params[:sort] : 'id'
-    end
+      def set_product
+        @product = Product.find(params[:id])
+      end
 
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+      def product_params
+        params.require(:product).permit(
+          :id,
+          :title,
+          :price,
+          :description,
+          :status,
+          :category_id,
+          :image,
+        )
+      end
     end
   end
 end
