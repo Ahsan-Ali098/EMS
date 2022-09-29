@@ -20,4 +20,12 @@ Rails.application.routes.draw do
   post 'user/orders/discount', to: 'user/orders#discount', as: 'orders_coupon'
   post 'payments/create', to: 'payments#create'
   resources :invitations, only: %i[new create]
+
+  namespace :api do
+    post :auth, to: 'authentication#create'
+    namespace :admin do
+      resources :users
+      resources :products
+    end
+  end
 end
